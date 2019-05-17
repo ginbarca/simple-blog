@@ -1,0 +1,36 @@
+<div th:fragment="left-menu" th:remove="tag" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<div class="left side-menu" id="side-menu" onmouseleave="$('#toggle-butt').click();" style="overflow-y: auto; height: 100%;">
+		<!-- <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+			<i class="ti-close"></i>
+		</button> -->
+		<!-- LOGO -->
+		<div class="topbar-left">
+			<div class="text-center">
+				<a th:href="@{/}" class="logo"><img th:src="@{/admin/images/blog-logo.png}" width="50%" /></a>
+			</div>
+			<div class="sidebar-inner slimscrollleft">
+				<div class="user-details">
+					<div class="user-info" sec:authorize="isAuthenticated()">
+						<h4 class="font-14 text-primary"></h4>
+						<div>
+							<a th:href="@{/member/profile}"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Hồ sơ <a th:href="@{/member/doi-mat-khau}"><i class="mdi mdi-lock m-r-5 text-muted"></i> Mật khẩu</a> <a th:href="@{/logout}"><i class="mdi mdi-logout m-r-5 text-muted"></i>Thoát</a>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div id="sidebar-menu">
+					<ul sec:authorize="hasAnyRole('ROLE_ADMIN')">
+						<li><a th:href="@{/admin/post/list}" class="waves-effect"> <i class="fa fa-clipboard"></i> <span th:text="#{post.list.title}"> </span>
+						</a></li>
+						<li><a th:href="@{/admin/category/list}" class="waves-effect"> <i class="fa fa-folder"></i> <span th:text="#{category.list.title}"> </span>
+						</a></li>
+						<li><a th:href="@{/admin/image/list}" class="waves-effect"> <i class="fa fa-image"></i> <span th:text="#{image.list.title}"> </span>
+						</a></li>
+					</ul>
+					<hr sec:authorize="hasAnyRole('ROLE_ADMIN')" />
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>

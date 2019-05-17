@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="admin/common/template">
+
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="#{image.list.title}"></title>
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="row">
+			<div class="col-12">
+				<div class="card m-b-30">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<h4 class="mt-0 header-title" th:text="#{image.list.title}"></h4>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<a data-toggle="modal" href="" data-target="#add-image" class="pull-right btn btn-primary"><img th:src="@{/admin/images/add.png}" height="20" />Thêm mới</a>
+							</div>
+						</div>
+						<hr />
+						<div class="table-responsive">
+							<table id="datatable" class="table table-bordered">
+								<thead>
+									<tr>
+										<th></th>
+										<th th:text="#{image.name}"></th>
+										<th th:text="#{image.categoryName}"></th>
+										<th th:text="#{text.createdDate}"></th>
+										<th th:text="#{text.updatedDate}"></th>
+										<th th:text="#{text.option}"></th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<td colspan="6"><button id="delButt" class="btn btn-danger">
+												<i class="fa fa-trash"></i>Xóa tất
+											</button></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="add-image" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title">
+							<span th:text="#{image.add.title}" th:remove="tag"></span>
+						</h6>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" enctype="multipart/form-data">
+							<div class="form-group row">
+								<label class="col-sm-3 form-label" th:text="#{image.name}"></label>
+								<div class="col-sm-9">
+									<input type="file" required="required" class="form-control" id="imageFile" name="imageFile" />
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 form-label" th:text="#{image.categoryId}"></label>
+								<div class="col-sm-9 ">
+									<select class="form-control" name="categoryId" id="categoryId">
+										<option th:each="category: ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3"></div>
+								<div class="form-group col-sm-9">
+									<div>
+										<button id="addButton" type="submit" style="width: 60%;" class="btn btn-primary waves-effect waves-light" th:text="#{text.add}"></button>
+										<button type="reset" class="btn btn-warning waves-effect waves-light" th:text="#{text.reset}"></button>
+										<button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal" th:text="#{text.cancel}"></button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="update-image" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title">
+							<span th:text="#{image.update.title}" th:remove="tag"></span>
+						</h6>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" enctype="multipart/form-data">
+							<input type="hidden" name="id" id="id">
+							<div class="form-group row">
+								<label class="col-sm-3 form-label" th:text="#{image.name}"></label>
+								<div class="col-sm-9">
+									<input type="file" required="required" class="form-control" id="imageFile" name="imageFile" />
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 form-label" th:text="#{image.categoryId}"></label>
+								<div class="col-sm-9 ">
+									<select class="form-control" name="categoryId" id="categoryId">
+										<option th:each="category: ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-3"></div>
+								<div class="form-group col-sm-9">
+									<div>
+										<button id="updateButton" type="submit" style="width: 60%;" class="btn btn-primary waves-effect waves-light" th:text="#{text.update}"></button>
+										<button type="reset" class="btn btn-warning waves-effect waves-light" th:text="#{text.reset}"></button>
+										<button type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal" th:text="#{text.cancel}"></button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" th:text="#{image.delete.confirm.message}"></div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{text.no}"></button>
+						<a class="btn btn-danger btn-ok" style="color: white;" th:text="#{text.delete}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="confirm-delete-multi" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" th:text="#{image.delete.confirm.message}"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{text.no}"></button>
+						<button class="btn btn-danger btn-ok" style="color: white;" th:text="#{text.delete}"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="please-select-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">Vui lòng tích chọn các dòng để xoá?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{text.cancel}"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" th:inline="javascript">
+			var vietnameseUrl = [[@{/user/plugins/datatables/Vietnamese.json}]];
+			var url = [[@{/admin/image/list}]];
+			var addURL = [[@{/admin/image/add}]];
+			var updateURL = [[@{/admin/image/update}]];
+			var delUrl = [[@{/admin/image/delete}]];
+			var delMultiUrl = [[@{/admin/image/delete-multi}]];
+			var csrf_token = [[${_csrf.token}]];
+			var searchHolderText = [[#{image.search.title}]];
+
+			var id = "";
+			var table;
+			$(document).ready(function () {
+				table = $('#datatable').DataTable({
+					"processing": true,
+					"serverSide": true,
+					"ajax": {
+						type: "POST",
+						url: url,
+						dataType: "json",
+						contentType: "application/json",
+						headers: { 'X-CSRF-TOKEN': csrf_token },
+						data: function (d) {
+							return JSON.stringify(d);
+						}
+					},
+					"lengthMenu": [10, 25, 50, 100, 200],
+					"columns": [
+						{ "data": "id" },
+						{ "data": "image" },
+						{ "data": "categoryName" },
+						{ "data": "createdDate" },
+						{ "data": "updatedDate" },
+						{ "data": "id" }
+					],
+					"order": [2, "desc"],
+					"select": {
+						'style': 'multi'
+					},
+					"columnDefs": [
+						{
+							'targets': 0,
+							'checkboxes': {
+								'selectRow': true
+							}
+						},
+						{
+							'targets': 1,
+							"render": function (data, type, row) {
+								var content = '';
+								content += '<img src="http://localhost:8080/user/image/' + (row.image) + '" width="150" height="120"/>';
+								return content;
+							}
+						},
+						{
+							"render": function (data, type, row) {
+								var content = '';
+								content += '<button class="btn btn-primary" data-toggle="modal" data-target="#update-image" data-image=' + (row.image) + '><i class="fa fa-pencil"></i>Sửa</button>'
+									+ '<button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-id=' + encodeURI(row.id) + ' data-image=' + encodeURI(row.image) + '><i class="fa fa-trash"></i>Xóa</button>';
+								return content;
+							},
+							"orderable": false,
+							"targets": 5
+						}
+					],
+					"language": {
+						"url": vietnameseUrl,
+						searchPlaceholder: searchHolderText
+					}
+				});
+
+				$('#datatable tbody').on('click', 'button', function () {
+					var data = table.row($(this).parents('tr')).data();
+					id = data.id;
+				});
+
+				$('#confirm-delete').on('click', '.btn-ok', function (e) {
+					var $modalDiv = $(e.delegateTarget);
+					console.log(id);
+					$.get(delUrl + '/' + id).then(function () {
+						$modalDiv.modal('hide');
+						table.draw();
+					});
+				});
+
+				//triggered when modal is about to be shown
+				$('#confirm-delete').on('show.bs.modal', function (e) {
+					//get data-id attribute of the clicked element
+					var id = $(e.relatedTarget).data('id');
+
+					//populate the textbox
+					$(e.currentTarget).find('div.modal-body').html('<strong> ID: ' + decodeURI(id) + '</strong>');
+				});
+				// Handle form submission event
+				var rowIds = [];
+				$('#delButt').on('click', function (e) {
+					var rows_selected = table.column(0).checkboxes.selected();
+					rowIds = [];
+					// Iterate over all selected checkboxes
+					$.each(rows_selected, function (index, rowId) {
+						// Create a hidden element
+						rowIds.push(rowId);
+					});
+					if (rows_selected.length == 0) {
+						$("#please-select-dialog").modal('show');
+					} else {
+						$("#confirm-delete-multi").modal('show');
+					}
+				});
+				$('#confirm-delete-multi').on('click', '.btn-ok', function (e) {
+					var $modalDiv = $(e.delegateTarget);
+					$.get(delMultiUrl + '/' + rowIds.toString()).then(function () {
+						$modalDiv.modal('hide');
+						table.draw();
+					});
+				});
+
+				///bind event submit to form
+				$("#add-image form").submit(function (e) {
+					e.preventDefault();
+
+					var formData = new FormData(this);
+					console.log(formData);
+					$.ajax({
+						url: addURL,
+						type: 'POST',
+						dataType: "text",
+						cache: false,
+						contentType: false,
+						processData: false,
+						headers: { 'X-CSRF-TOKEN': csrf_token },
+						data: formData,
+						success: function () {
+							$("#add-image #imageFile").val(null);
+							$('#add-image').modal('hide');
+							table.draw();
+						},
+						error: function () {
+							alert("Loi xay ra");
+						}
+					});
+				});
+				//triggered when modal is about to be shown
+				$('#update-image').on('show.bs.modal', function(e) {
+				    $("#update-image #id").val(id);
+
+				    /* var name = $(e.relatedTarget).data('name');
+				    $("#update-image #name").val(name); */
+
+				});
+				$("#update-image form").submit(function (e) {
+					e.preventDefault();
+
+					var formData = new FormData(this);
+					console.log(formData);
+					$.ajax({
+						url: updateURL,
+						type: 'POST',
+						dataType: "text",
+						cache: false,
+						contentType: false,
+						processData: false,
+						headers: { 'X-CSRF-TOKEN': csrf_token },
+						data: formData,
+						success: function () {
+							$("#update-image #imageFile").val(null);
+							$('#update-image').modal('hide');
+							table.draw();
+						},
+						error: function () {
+							alert("Loi xay ra");
+						}
+					});
+				});
+			});
+		</script>
+	</div>
+</body>
+
+</html>

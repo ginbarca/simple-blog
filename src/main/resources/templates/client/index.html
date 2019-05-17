@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="client/common/template">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<!-- banner -->
+
+		<div class="banner">
+			<div class="container">
+				<h2>Contrary to popular belief, Lorem Ipsum simply.</h2>
+				<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+				<a href="singlepage.html">READ MORE</a>
+			</div>
+		</div>
+		<div class="services w3l wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+			<div class="container">
+				<div class="grid_3 grid_5">
+					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+						<ul id="myTab" class="nav nav-tabs" role="tablist">
+							<li th:each="c : ${listCategories}" role="presentation" class="" th:value="${c.id}"><a th:href="@{'#' + ${c.name}}" role="tab" th:id="${c.name + '-tab'}" data-toggle="tab" th:attr="aria-controls=${c.name}" th:text="${c.name}"></a></li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div th:each="c : ${listCategories}" role="tabpanel" class="tab-pane fade" th:value="${c.id}" th:id="${c.name}" th:attr="aria-labelledby=${c.name + '-tab'}">
+								<div th:each="i : ${listImages}" th:if="${i.categoryId} == ${c.id}" class="col-md-4 col-sm-5 tab-image">
+									<img th:src="@{'/user/image/' + ${i.image} }" class="img-responsive" alt="Wanderer">
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- technology-left -->
+		<div class="technology">
+			<div class="container">
+				<div class="col-md-9 technology-left">
+					<div class="tech-no">
+						<!-- technology-top -->
+
+						<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-1}" class="tc-ch wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+
+							<div class="tch-img">
+								<a href="singlepage.html"><img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+							</div>
+
+							<h3>
+								<a href="singlepage.html" th:text="${p.title}"></a>
+							</h3>
+							<h6>
+								BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+								<h6 th:text="${p.createdDate}"></h6>
+							</h6>
+							<p th:text="${p.content}"></p>
+							<div class="bht1">
+								<a href="singlepage.html">Continue Reading</a>
+							</div>
+							<div class="soci">
+								<ul>
+									<li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
+									<li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
+									<li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>
+									<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+									<li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+						<!-- technology-top -->
+						<!-- technology-top -->
+						<div class="w3ls">
+							<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-2}" class="col-md-6 w3ls-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="tc-ch">
+									<div class="tch-img">
+										<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+									</div>
+
+									<h3>
+										<a href="singlepage.html" th:text="${p.title}"></a>
+									</h3>
+									<h6>
+										BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+										<h6 th:text="${p.createdDate}"></h6>
+									</h6>
+									<p th:text="${p.content}"></p>
+									<div class="bht1">
+										<a href="singlepage.html">Read More</a>
+									</div>
+									<div class="soci">
+										<ul>
+											<li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
+											<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+										</ul>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-3}" class="col-md-6 w3ls-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="tc-ch">
+									<div class="tch-img">
+										<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+									</div>
+
+									<h3>
+										<a href="singlepage.html" th:text="${p.title}"></a>
+									</h3>
+									<h6>
+										BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+										<h6 th:text="${p.createdDate}"></h6>
+									</h6>
+									<p th:text="${p.content}"></p>
+									<div class="bht1">
+										<a href="singlepage.html">Read More</a>
+									</div>
+									<div class="soci">
+										<ul>
+											<li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
+											<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+										</ul>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<!-- technology-top -->
+						<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-4}" class="wthree">
+							<div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="tch-img">
+									<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+								</div>
+							</div>
+							<div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<h3>
+									<a href="singlepage.html" th:text="${p.title}"></a>
+								</h3>
+								<h6>
+									BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+									<h6 th:text="${p.createdDate}"></h6>
+								</h6>
+								<p th:text="${p.content}"></p>
+								<div class="bht1">
+									<a href="singlepage.html">Read More</a>
+								</div>
+								<div class="soci">
+									<ul>
+
+										<li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
+										<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+									</ul>
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-5}" class="wthree">
+							<div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="tch-img">
+									<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+								</div>
+							</div>
+							<div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<h3>
+									<a href="singlepage.html" th:text="${p.title}"></a>
+								</h3>
+								<h6>
+									BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+									<h6 th:text="${p.createdDate}"></h6>
+								</h6>
+								<p th:text="${p.content}"></p>
+								<div class="bht1">
+									<a href="singlepage.html">Read More</a>
+								</div>
+								<div class="soci">
+									<ul>
+
+										<li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
+										<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+									</ul>
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div th:each="p,i : ${listPosts}" th:if="${i.index == i.size-6}" class="wthree">
+							<div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="tch-img">
+									<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+								</div>
+							</div>
+							<div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<h3>
+									<a href="singlepage.html" th:text="${p.title}"></a>
+								</h3>
+								<h6>
+									BY <a href="singlepage.html" th:text="${p.createdByName}"> </a>
+									<h6 th:text="${p.createdDate}"></h6>
+								</h6>
+								<p th:text="${p.content}"></p>
+								<div class="bht1">
+									<a href="singlepage.html">Read More</a>
+								</div>
+								<div class="soci">
+									<ul>
+
+										<li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
+										<li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
+									</ul>
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				<!-- technology-right -->
+				<div class="col-md-3 technology-right">
+					<div class="blo-top1">
+						<div class="tech-btm">
+							<div class="search-1 wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<form action="#" method="post">
+									<input type="search" name="Search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required=""> <input type="submit" value=" ">
+								</form>
+							</div>
+							<h4>Popular Posts</h4>
+							<div th:each="p : ${listPosts}" class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<div class="blog-grid-left">
+									<a href="singlepage.html"> <img th:src="@{'/user/image/' + ${p.image} }" class="img-responsive" alt=""></a>
+								</div>
+								<div class="blog-grid-right">
+									<h5>
+										<a href="singlepage.html" th:text="${p.title}"></a>
+									</h5>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							
+							<div class="insta wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+								<h4>Instagram</h4>
+								<ul>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/t1.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/m1.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/f1.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/m2.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/f2.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/t2.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/f3.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/t3.jpg}" class="img-responsive" alt=""></a></li>
+									<li><a href="singlepage.html"><img th:src="@{/client/images/m3.jpg}" class="img-responsive" alt=""></a></li>
+								</ul>
+							</div>
+
+							<p>Lorem ipsum ex vix illud nonummy, novum tation et his. At vix scripta patrioque scribentur, at pro</p>
+							<div class="twt">
+
+								<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-hashtag-button twitter-hashtag-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.b7de008f493a5185d8df1aedd62d77c6.en.html#button_hashtag=TwitterStories&amp;dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fp.w3layouts.com%2Fdemos%2Fduplex%2Fweb%2F&amp;size=l&amp;time=1467721486626&amp;type=hashtag" style="position: static; visibility: visible; width: 166px; height: 28px;" data-hashtag="TwitterStories"></iframe>
+								<script>
+									!function(d, s, id) {
+										var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+												.test(d.location) ? 'http'
+												: 'https';
+										if (!d.getElementById(id)) {
+											js = d.createElement(s);
+											js.id = id;
+											js.src = p
+													+ '://platform.twitter.com/widgets.js';
+											fjs.parentNode
+													.insertBefore(js, fjs);
+										}
+									}(document, 'script', 'twitter-wjs');
+								</script>
+							</div>
+						</div>
+
+
+
+					</div>
+
+
+				</div>
+				<div class="clearfix"></div>
+				<!-- technology-right -->
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("li[value='8']").addClass("active");
+				$("div[value='8']").addClass("active in");
+			});
+		</script>
+	</div>
+</body>
+</html>
